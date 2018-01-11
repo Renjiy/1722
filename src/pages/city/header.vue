@@ -62,14 +62,4 @@ export default {
 				.select
 					color: #00bcd4
 					background: #fff
-				
-				
-			
-			
-			
-			
-			
-		
-		
-
 </style>
