@@ -12,7 +12,7 @@
 
 <script scoped>
 export default {
-  name: 'city'
+  name: 'cityHeader'
 }
 </script>
 

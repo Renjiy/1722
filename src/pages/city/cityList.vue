@@ -23,43 +23,21 @@
 		</div>
  	</div>
 </template>
-
 <script>
-  import axios from 'axios'
   export default {
     name: 'cityList',
-    data () {
-      return {
-        hotCityInfo: [],
-        domesticCityList: []
-      }
+    props: {
+      hotCityInfo: Array,
+      domesticCityList: Array
     },
     methods: {
-      getCityListData () {
-        axios.get('/api/cityList.json')
-          .then(this.handleGetDataSucc.bind(this))
-          .catch(this.handleGetDataErr.bind(this))
-      },
-      handleGetDataSucc (res) {
-        const data = res.data.data
-        this.hotCityInfo = data.hotcity
-        this.domesticCityList = data.china
-        console.log(this.domesticCityList)
-      },
-      handleGetDataErr () {
-        console.log('error')
-      },
       handleClick (e) {
         const city = e.target.innerHTML
         this.$refs.selectCity.innerHTML = city
       }
-    },
-    created () {
-      this.getCityListData()
     }
   }
 </script>
-
 <style lang="stylus" scoped>
 	.area-title
 		background: #f5f5f5
