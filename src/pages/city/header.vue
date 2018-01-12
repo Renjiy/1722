@@ -1,7 +1,11 @@
 <template>
  	<div class="header-container">
 			<header class="header">
-				<div class="header-left iconfont">&#xe624;</div>
+        <router-link to="/">
+  				<div class="header-left iconfont">
+            &#xe624;
+          </div>
+        </router-link>
 				<div class="header-title">
 					<div class="areaSwitch inland select">国内</div>
 					<div class="areaSwitch foreign">国外</div>

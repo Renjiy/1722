@@ -2,7 +2,10 @@
   <div class="body">
 	  <city-header></city-header>
 	  <city-search></city-search>
-	  <city-List :hotCityInfo="hotCityInfo" :domesticCityList="domesticCityList"></city-List>
+	  <city-List :hotCityInfo="hotCityInfo"
+               :domesticCityList="domesticCityList"
+               :city="city"
+                ></city-List>
   </div>
 </template>
 
@@ -21,12 +24,14 @@
     data () {
       return {
         hotCityInfo: [],
-        domesticCityList: []
+        domesticCityList: [],
+        city: ''
       }
     },
     methods: {
       getCityListData () {
-        axios.get('/api/cityList.json')
+        const city = localStorage.city ? localStorage.city: ''
+        axios.get('/api/cityList.json?city=' + city)
           .then(this.handleGetDataSucc.bind(this))
           .catch(this.handleGetDataErr.bind(this))
       },
@@ -34,6 +39,9 @@
         const data = res.data.data
         this.hotCityInfo = data.hotcity
         this.domesticCityList = data.china
+        this.city = data.city
+        // this.$bus.$emit('change', data.city)
+        localStorage.city = data.city
       },
       handleGetDataErr () {
         console.log('error')

@@ -3,7 +3,7 @@
 	 	<div class="location-containner">
 			<h6 class="area-title">您的位置</h6>
 			<div class="location">
-				<div class="location-city citySelect"  ref="selectCity">北京</div>
+				<div class="location-city citySelect"  ref="selectCity">{{city}}</div>
 			</div>
 		</div>
 		<div class="hotCity-containner">
@@ -28,12 +28,14 @@
     name: 'cityList',
     props: {
       hotCityInfo: Array,
-      domesticCityList: Array
+      domesticCityList: Array,
+      city: String
     },
     methods: {
       handleClick (e) {
-        const city = e.target.innerHTML
-        this.$refs.selectCity.innerHTML = city
+        localStorage.city = e.target.innerHTML
+        this.$bus.$emit('change', e.target.innerHTML)
+        this.$router.go(-1)
       }
     }
   }
@@ -48,7 +50,7 @@
 	.location
 		background: #fff
 		overflow: hidden
-		padding: .04rem .5rem .26rem .2rem	
+		padding: .04rem .5rem .26rem .2rem
 		.location-city
 			box-sizing: border-box
 			border: .02rem solid #c9cccd
@@ -82,12 +84,12 @@
 	.selector
 		position: fixed
 		right: 0
-		top: 22%	
+		top: 22%
 		.selectorItem
 			color: #00afc7
 			font-size: .24rem
 			line-height: .33rem
 			padding-right: 0.1rem
 			text-align: center
-				
+
 </style>
