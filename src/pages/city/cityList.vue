@@ -9,16 +9,16 @@
 		<div class="hotCity-containner">
 			<h6 class="area-title">热门城市</h6>
 			<div class="hotCity location">
-				<div class="hotCity-city location-city" v-for="item of hotCityInfo" @click="handleClick">{{item.city}}</div>
+				<div class="hotCity-city location-city" v-for="item of hotCityInfo" @click="handleCityClickChange">{{item.city}}</div>
 			</div>
 		</div>
 		<div class="DomesticCityList-container">
-			<div v-for="city of domesticCityList">
-				<h6 class="area-title">{{city[0]}}</h6>
+			<div v-for="city of domesticCityList" :ref="city[0]">
+				<h6 class="area-title" >{{city[0]}}</h6>
 				<div class="Inland-cityList" v-for="item of city[1]">{{item.cityarea}}</div>
 			</div>
 		</div>
-		<div class="selector">
+		<div class="selector" @click="handleCityClickRolling">
 			<h5 class="selectorItem" v-for="index of domesticCityList">{{index[0]}}</h5>
 		</div>
  	</div>
@@ -31,9 +31,19 @@
       domesticCityList: Array
     },
     methods: {
-      handleClick (e) {
+      handleCityClickChange (e) {
         const city = e.target.innerHTML
         this.$refs.selectCity.innerHTML = city
+      },
+      handleCityClickRolling (e) {
+        this.target = e.target
+        const name = this.target.innerHTML
+        if (document.documentElement.scrollTop) {
+          document.documentElement.scrollTop = this.$refs[name][0].offsetTop - 45
+          console.log(document.documentElement.scrollTop)
+        } else {
+          document.body.scrollTop = this.$refs[name][0].offsetTop - 45
+        }
       }
     }
   }
@@ -88,6 +98,5 @@
 			font-size: .24rem
 			line-height: .33rem
 			padding-right: 0.1rem
-			text-align: center
-				
+			text-align: center		
 </style>
