@@ -3,30 +3,60 @@
 	 	<div class="location-containner">
 			<h6 class="area-title">您的位置</h6>
 			<div class="location">
-				<div class="location-city citySelect">北京</div>
+				<div class="location-city citySelect"  ref="selectCity">北京</div>
 			</div>
 		</div>
 		<div class="hotCity-containner">
 			<h6 class="area-title">热门城市</h6>
 			<div class="hotCity location">
-				<div class="hotCity-city location-city">北京</div>
-				<div class="hotCity-city location-city">北京</div>
-				<div class="hotCity-city location-city">北京</div>
-				<div class="hotCity-city location-city">北京</div>
-				<div class="hotCity-city location-city">北京</div>
-				<div class="hotCity-city location-city">北京</div>
-				<div class="hotCity-city location-city">北京</div>
-				<div class="hotCity-city location-city">北京</div>
-				<div class="hotCity-city location-city">北京</div>
-				<div class="hotCity-city location-city">北京</div>
+				<div class="hotCity-city location-city" v-for="item of hotCityInfo" @click="handleClick">{{item.city}}</div>
 			</div>
+		</div>
+		<div class="DomesticCityList-container">
+			<div v-for="city of domesticCityList">
+				<h6 class="area-title">{{city[0]}}</h6>
+				<div class="Inland-cityList" v-for="item of city[1]">{{item.cityarea}}</div>
+			</div>
+		</div>
+		<div class="selector">
+			<h5 class="selectorItem" v-for="index of domesticCityList">{{index[0]}}</h5>
 		</div>
  	</div>
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
-    name: 'cityList'
+    name: 'cityList',
+    data () {
+      return {
+        hotCityInfo: [],
+        domesticCityList: []
+      }
+    },
+    methods: {
+      getCityListData () {
+        axios.get('/api/cityList.json')
+          .then(this.handleGetDataSucc.bind(this))
+          .catch(this.handleGetDataErr.bind(this))
+      },
+      handleGetDataSucc (res) {
+        const data = res.data.data
+        this.hotCityInfo = data.hotcity
+        this.domesticCityList = data.china
+        console.log(this.domesticCityList)
+      },
+      handleGetDataErr () {
+        console.log('error')
+      },
+      handleClick (e) {
+        const city = e.target.innerHTML
+        this.$refs.selectCity.innerHTML = city
+      }
+    },
+    created () {
+      this.getCityListData()
+    }
   }
 </script>
 
@@ -60,5 +90,26 @@
 		display: flex
 		flex-direction: row
 		flex-wrap: wrap
-		justify-content: space-between		
+		justify-content: space-between
+	.Inland-cityList
+		border-top: 1px solid #f5f5f5
+		color: #21212
+		font-size: .28rem
+		line-height: .76rem
+		overflow: hidden
+		padding-left: .2rem
+		text-overflow: ellipsis
+		white-space: nowrap
+		width: 100%
+	.selector
+		position: fixed
+		right: 0
+		top: 22%	
+		.selectorItem
+			color: #00afc7
+			font-size: .24rem
+			line-height: .33rem
+			padding-right: 0.1rem
+			text-align: center
+				
 </style>

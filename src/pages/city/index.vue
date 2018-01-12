@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="body">
 	  <city-header></city-header>
 	  <city-search></city-search>
 	  <city-List></city-List>
@@ -19,5 +19,7 @@
     }
   }
 </script>
-
-<style></style>
+<style lang="stylus" scoped>
+	.body
+		overflow: hidden
+</style>
