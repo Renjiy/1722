@@ -1,10 +1,13 @@
 <template>
  	<div class="header-container">
 			<header class="header">
-				<div class="header-left iconfont">&#xe624;</div>
+        <router-link to="/">
+  				<div class="header-left iconfont">
+            &#xe624;
+          </div>
+        </router-link>
 				<div class="header-title">
-					<div class="areaSwitch inland select">国内</div>
-					<div class="areaSwitch foreign">国外</div>
+					<div class="area-switch">国内</div>
 				</div>
 			</header>
 	</div>
@@ -48,18 +51,12 @@ export default {
 				display: flex
 				flex-direction: row
 				height: .56rem
-				width: 4.04rem
-				.areaSwitch
+				width: 2rem
+				.area-switch
 					border: 1px solid #fff
-					line-height: .54rem
-					width: 2rem
-				.inland
-					border-top-left-radius: 0.1rem
-					border-bottom-left-radius: 0.1rem
-				.foreign
-					border-top-right-radius: 0.1rem
-					border-bottom-right-radius: 0.1rem
-				.select
-					color: #00bcd4
 					background: #fff
+					border-radius: 0.1rem
+					color: #00bcd4
+					line-height: .54rem
+					width: 2rem			
 </style>

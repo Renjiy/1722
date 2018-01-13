@@ -3,23 +3,23 @@
 	 	<div class="location-containner">
 			<h6 class="area-title">您的位置</h6>
 			<div class="location">
-				<div class="location-city citySelect"  ref="selectCity">北京</div>
+				<div class="location-city city-select"  ref="selectCity">{{city}}</div>
 			</div>
 		</div>
 		<div class="hotCity-containner">
 			<h6 class="area-title">热门城市</h6>
-			<div class="hotCity location">
+			<div class="hot-city location">
 				<div class="hotCity-city location-city" v-for="item of hotCityInfo" @click="handleCityClickChange">{{item.city}}</div>
 			</div>
 		</div>
 		<div class="DomesticCityList-container">
-			<div v-for="city of domesticCityList" :ref="city[0]">
-				<h6 class="area-title" >{{city[0]}}</h6>
-				<div class="Inland-cityList" v-for="item of city[1]">{{item.cityarea}}</div>
+			<div v-for="city of domesticCityList"  :ref="city[0]">
+				<h6 class="area-title">{{city[0]}}</h6>
+				<div class="inland-citylist" v-for="item of city[1]">{{item.cityarea}}</div>
 			</div>
 		</div>
-		<div class="selector" @click="handleCityClickRolling">
-			<h5 class="selectorItem" v-for="index of domesticCityList">{{index[0]}}</h5>
+		<div class="selector">
+			<h5 class="selector-item" v-for="index of domesticCityList" @click="handleCityClickRolling">{{index[0]}}</h5>
 		</div>
  	</div>
 </template>
@@ -28,19 +28,20 @@
     name: 'cityList',
     props: {
       hotCityInfo: Array,
-      domesticCityList: Array
+      domesticCityList: Array,
+      city: String
     },
     methods: {
       handleCityClickChange (e) {
         const city = e.target.innerHTML
-        this.$refs.selectCity.innerHTML = city
+        this.$bus.$emit('change', city)
+        this.$router.go(-1)
       },
       handleCityClickRolling (e) {
         this.target = e.target
         const name = this.target.innerHTML
         if (document.documentElement.scrollTop) {
           document.documentElement.scrollTop = this.$refs[name][0].offsetTop - 45
-          console.log(document.documentElement.scrollTop)
         } else {
           document.body.scrollTop = this.$refs[name][0].offsetTop - 45
         }
@@ -71,15 +72,15 @@
 			text-align: center
 			white-space: nowrap
 			width: 30%
-		.citySelect
+		.city-select
 			border-color: #00afc7
 			color: #00afc7
-	.hotCity
+	.hot-city
 		display: flex
 		flex-direction: row
 		flex-wrap: wrap
 		justify-content: space-between
-	.Inland-cityList
+	.inland-citylist
 		border-top: 1px solid #f5f5f5
 		color: #21212
 		font-size: .28rem
@@ -93,7 +94,7 @@
 		position: fixed
 		right: 0
 		top: 22%	
-		.selectorItem
+		.selector-item
 			color: #00afc7
 			font-size: .24rem
 			line-height: .33rem

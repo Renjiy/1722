@@ -1,23 +1,29 @@
 <template>
-	<div class="Search-Area">
-		<input type="search" placeholder="输入城市名或拼音" class="Search-Input" />
+	<div class="search-area">
+		<input type="search" placeholder="输入城市名或拼音" class="search-input" @keyup="handleSearchCity"/>
 	</div>
 </template>
 
 <script>
 export default {
-  name: 'citySearch'
+  name: 'citySearch',
+  methods: {
+    handleSearchCity (e) {
+      var inputVal = e.target.value
+      this.$emit('searchCity', inputVal)
+    }
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
-	.Search-Area
+	.search-area
 		background: #00bcd4
 		color: #9e9e9e
 		font-size: .26rem
 		margin-top: .88rem
 		padding: .06rem .2rem .1rem .2rem
-		.Search-Input
+		.search-input
 			border: 0
 			border-radius: .06rem
 			display: block
