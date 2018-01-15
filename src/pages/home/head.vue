@@ -2,10 +2,10 @@
   <div class="head">
     <div class="back iconfont">&#xe624;</div>
     <div class="search">
-      <span class="iconfont search-icon">&#xe632;</span>请输入搜索内容
+      <span class="iconfont search-icon">&#xe632;</span>输入城市/景点/游玩主题
     </div>
     <div class="city">
-      乌鲁木齐
+      昌平
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
     height: .88rem
     line-height: .88rem
     .back
-      font-size: .4rem
+      font-size: .3rem
       font-weight: bold
       text-align: center
       width: .58rem
