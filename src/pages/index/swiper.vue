@@ -1,9 +1,10 @@
 <template>
   <div class="slide-container">
     <swiper :options="swiperOption">
-      <swiper-slide v-for="item of list" :key="item.id">
-        <img class="slide-img" :src="item.imgUrl" />
-      </swiper-slide>
+      <!-- slides -->
+        <swiper-slide v-for="item of list" :key="item.id">     
+          <img class="slide-img" :src="item.imgUrl" alt="">        
+        </swiper-slide>
       <div class="swiper-pagination"  slot="pagination"></div>
     </swiper>
   </div>
@@ -19,6 +20,7 @@
       return {
         swiperOption: {
           loop: true,
+          autoplay: 2000,
           pagination: '.swiper-pagination'
         }
       }
@@ -29,10 +31,10 @@
 <style lang="stylus" scoped>
   @import "../../assets/stylus/varibles.styl";
   .swiper-pagination >>> .swiper-pagination-bullet-active
-    background: $bgColor
+    background: red
   .slide-container
-    overflow: hidden
     height: 0
+    overflow: hidden
     padding-bottom: 31.25%
   .slide-img
     width: 100%

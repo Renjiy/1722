@@ -1,8 +1,8 @@
 <template>
   <div>
-    <index-header></index-header>
-    <index-swiper :list="swiperInfo"></index-swiper>
-    <index-icons :list="iconsInfo"></index-icons>
+  	<index-header></index-header>
+  	<index-swiper :list="swiperInfo"></index-swiper>
+  	<index-icons :icons="iconsList"></index-icons>
   </div>
 </template>
 
@@ -21,22 +21,22 @@
     data () {
       return {
         swiperInfo: [],
-        iconsInfo: []
+        iconsList: []
       }
     },
     methods: {
       getIndexData () {
         axios.get('/api/index.json')
-          .then(this.handleGetDataSucc.bind(this))
-          .catch(this.handleGetDataErr.bind(this))
+             .then(this.handleGetIndexDataSucc.bind(this))
+             .catch(this.handleGetIndexDataError.bind(this))
       },
-      handleGetDataSucc (res) {
+      handleGetIndexDataSucc (res) {
         const data = res.data.data
         this.swiperInfo = data.swiperList
-        this.iconsInfo = data.iconList
+        this.iconsList = data.iconList
       },
-      handleGetDataErr () {
-        console.log('error')
+      handleGetIndexDataError () {
+        console.log('没加载成功')
       }
     },
     created () {
@@ -45,4 +45,6 @@
   }
 </script>
 
-<style></style>
+<style>
+
+</style>

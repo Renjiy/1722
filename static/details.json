@@ -1,0 +1,32 @@
+{
+  "ret": true,
+  "data": {
+    "showImgList": [{
+        "id": "1001",
+        "imgUrl": "http://img1.qunarzz.com/sight/p55/201211/04/fbcab3e5d6479ce893835fbb.jpg_800x800_3f52b8da.jpg",
+        "link": "/list",
+        "title": "故宫"
+      }, {
+        "id": "1002",
+        "imgUrl": "http://img1.qunarzz.com/wugc/p180/201306/16/7f08e81624346b1693835fbb.jpg_800x800_eb941a31.jpg",
+        "link": "/list",
+        "title": "故宫"
+      }, {
+        "id": "1003",
+        "imgUrl": "http://img1.qunarzz.com/wugc/p123/201211/19/a2045d091f02b25493835fbb.png_800x800_5e80fcc3.png",
+        "link": "/list",
+        "title": "故宫"
+      },  {
+        "id": "1004",
+        "imgUrl": "http://img1.qunarzz.com/sight/p0/1410/be/d44bb81ae3218a627a65ded451326b2c.water.jpg_800x800_e66340c8.jpg",
+        "link": "/list",
+        "title": "故宫"
+    }],
+    "iconList": [{
+      "id": "1001",
+      "imgUrl": "http://img1.qunarzz.com/wugc/p123/201211/19/a2045d091f02b25493835fbb.png_800x800_5e80fcc3.png",
+      "link": "/list",
+      "title": "故宫"
+    }]
+  }
+}

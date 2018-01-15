@@ -1,9 +1,12 @@
 <template>
   <div class="details">
-    <details-header></details-header>
+    <details-header :list="showList"></details-header>
     <base-info></base-info>
     <comments></comments>
     <announce></announce>
+    <list></list>
+    <fadein></fadein>
+    <group :list="groupList" :hidelist="hideList"></group>
   </div>
 </template>
 
@@ -12,13 +15,55 @@
   import BaseInfo from './baseinfo'
   import Comments from './comments'
   import Announce from './announce'
+  import List from './list'
+  import Group from '../../components/group'
+  import Fadein from '../../components/fadein'
+  import axios from 'axios'
   export default {
     name: 'index',
+    data () {
+      return {
+        showList: [],
+        groupList: [],
+        hideList: []
+      }
+    },
     components: {
       DetailsHeader,
       BaseInfo,
       Comments,
-      Announce
+      Announce,
+      List,
+      Group,
+      Fadein
+    },
+    methods: {
+      getShowImgInfo () {
+        axios.get('/api/details.json')
+             .then(this.handleGetShowImgSucc.bind(this))
+             .catch(this.handleGetShowImgErr.bind(this))
+        axios.get('/api/group.json')
+             .then(this.handleGetGroupSucc.bind(this))
+             .catch(this.handleGetGroupErr.bind(this))
+      },
+      handleGetShowImgSucc (res) {
+        const data = res.data.data
+        this.showList = data.showImgList
+      },
+      handleGetShowImgErr () {
+        console.log('error')
+      },
+      handleGetGroupSucc (res) {
+        const data = res.data.data
+        this.groupList = data.groupList
+        this.hideList = data.hideList
+      },
+      handleGetGroupErr () {
+        console.log('error')
+      }
+    },
+    created () {
+      this.getShowImgInfo()
     }
   }
 </script>

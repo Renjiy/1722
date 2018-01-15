@@ -22,9 +22,10 @@ export default new Router({
       name: 'Details',
       component: Details
     }, {
-      path: '/daytrip',
+      path: '/daytrip/:id',
       name: 'Daytrip',
-      component: Daytrip
+      component: Daytrip,
+      props: true
     }
   ]
 })

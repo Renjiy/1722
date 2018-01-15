@@ -1,14 +1,15 @@
 <template>
   <div class="icons">
     <swiper :options="swiperOption">
-      <swiper-slide v-for="(page, index) of pageList" :key="index">
-        <div class="area-con">
-          <div class="arae-item" v-for="item of page" :key="item.id">
-            <img class="area-img" :src="item.imgUrl"/>
-            <p class="area-desc">{{item.title}}</p>
-          </div>
-        </div>
-      </swiper-slide>
+      <!-- slides -->
+        <swiper-slide v-for="(page, index) of pageList" :key="index">     
+          <div class="area-con">
+            <div class="area-item" v-for="item of page" :key="item.id">
+              <img :src="item.imgUrl" alt="" class="area-img">
+              <p class="area-title" >{{item.title}}</p>
+            </div>
+          </div>    
+        </swiper-slide>
       <div class="swiper-pagination"  slot="pagination"></div>
     </swiper>
   </div>
@@ -18,11 +19,12 @@
   export default {
     name: 'index-icons',
     props: {
-      list: Array
+      icons: Array
     },
     data () {
       return {
         swiperOption: {
+          loop: true,
           pagination: '.swiper-pagination'
         }
       }
@@ -30,7 +32,7 @@
     computed: {
       pageList () {
         const pages = []
-        this.list.forEach((value, index) => {
+        this.icons.forEach((value, index) => {
           const page = Math.floor(index / 8)
           if (!pages[page]) {
             pages[page] = []
@@ -45,20 +47,20 @@
 
 <style lang="stylus" scoped>
   .icons
-    overflow: hidden
     height: 3.8rem
+    overflow: hidden
     .area-con
       display: flex
       flex-wrap: wrap
-      .arae-item
+      .area-item
         width: 25%
         height: 1.9rem
         .area-img
           display: block
-          margin: .3rem auto .2rem auto
+          margin: .3rem auto
           width: .9rem
           height: .9rem
-        .area-desc
+        .area-title
           overflow: hidden
           white-space: nowrap
           text-overflow: ellipsis
