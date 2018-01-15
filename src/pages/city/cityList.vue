@@ -3,7 +3,7 @@
 	 	<div class="location-containner">
 			<h6 class="area-title">您的位置</h6>
 			<div class="location">
-				<div class="location-city city-select"  ref="selectCity">{{city}}</div>
+				<div class="location-city city-select">{{city}}</div>
 			</div>
 		</div>
 		<div class="hotCity-containner">
