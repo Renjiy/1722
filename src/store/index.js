@@ -8,27 +8,10 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  state: {
-    city: localStorage.city || ''
-  },
-  getters: {
-    doubleCity (state) {
-      return state.city + state.city
-    }
-  },
-  actions: {
-    changeCityDelayFiveSeconds (context, city) {
-      setTimeout(() => {
-        context.commit('changeCity', city)
-      }, 5000)
-    }
-  },
-  mutations: {
-    changeCity (state, city) {
-      localStorage.city = city
-      state.city = city
-    }
-  }
+  state,
+  getters,
+  actions,
+  mutations
 })
 
 export default store

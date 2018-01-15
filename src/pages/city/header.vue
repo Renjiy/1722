@@ -4,7 +4,7 @@
         <router-link to="/">
   				<div class="header-left iconfont">
             &#xe624;
-          </div>
+          		</div>
         </router-link>
 				<div class="header-title">
 					<div class="area-switch">国内</div>

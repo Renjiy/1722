@@ -10,10 +10,10 @@
 			<h6 class="area-title">热门城市</h6>
 			<div class="hot-city location">
 				<div class="hotCity-city location-city"
-             v-for="item of hotCityInfo"
-             @click="handleCityClickChange">
-           {{item.city}}
-        </div>
+             		v-for="item of hotCityInfo"
+             		@click="handleCityClickChange">
+           			{{item.city}}
+        		</div>
 			</div>
 		</div>
 		<div class="DomesticCityList-container">

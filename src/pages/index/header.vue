@@ -23,7 +23,7 @@ export default {
       this.$router.push('/city')
     },
     sayHello () {
-      alert('hello')
+      console.log('hello')
     }
   }
 }
