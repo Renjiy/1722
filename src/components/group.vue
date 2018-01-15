@@ -18,46 +18,9 @@
           </div>
         </div><!--<div class="qunar-ticket-con-info">-->
       </div><!--<div class="qunar-ticket-con">-->
+
+      <hide-list :hidelist="hideList"></hide-list>
       
-      <div class="qunar-for" style="display:none;">
-        <div class="qunar-ticket-default" v-for="(item, index) of hidelist" :key="item.id">
-          <div class="qunar-ticket-item">
-            <div class="qunar-ticket-main">
-              <div>
-                <span class="qunar-ticket-onedayitem">{{item.title}}</span>
-                <h6 class="qunar-ticket-onedayitem-title">{{item.titleMiddle}}</h6>
-                <ul class="qunar-ticket-light"></ul>
-                <ul class="qunar-ticket-light">
-                  <span class="qunar-ticket-desctag">
-                    <span class="qunar-ticket-desctag-icon">☜</span>
-                    {{item.subTitleTop}}}
-                  </span>
-                  <span class="qunar-ticket-desctag">
-                    <span class="qunar-ticket-desctag-icon">☜</span>
-                    {{item.subTitleMiddle}}
-                  </span>
-                </ul>
-              </div>
-            </div><!--<div class="qunar-ticket-main">-->
-
-            <div class="qunar-ticket-side">
-              <a href="#" class="qunar-ticket-link">
-                <strong class="qunar-ticket-sale">
-                  ￥
-                  <em class="qunar-ticket-num">
-                    {{item.price}}
-                  </em>
-                </strong>
-                <em class="qunar-ticket-btn">
-                  预定
-                </em>
-              </a>
-            </div><!--div class="qunar-ticket-side">-->
-
-          </div><!--<div class="qunar-ticket-item">-->
-        </div><!--<div class="qunar-ticket-default">-->
-      </div>
-
       <div class="qunar-ticket-con" @click="handleShowDefault1(index)">
         <div class="qunar-ticket-con-info">
           <h5 class="qunar-ticket-name">
@@ -71,45 +34,6 @@
           </div>
         </div><!--<div class="qunar-ticket-con-info">-->
       </div><!--<div class="qunar-ticket-con">-->
-
-      <div class="qunar-for1" style="display:none;">
-        <div class="qunar-ticket-default" v-for="(item, index) of hidelist" :key="item.id">
-          <div class="qunar-ticket-item">
-            <div class="qunar-ticket-main">
-              <div>
-                <span class="qunar-ticket-onedayitem">{{item.title}}</span>
-                <h6 class="qunar-ticket-onedayitem-title">{{item.titleMiddle}}</h6>
-                <ul class="qunar-ticket-light"></ul>
-                <ul class="qunar-ticket-light">
-                  <span class="qunar-ticket-desctag">
-                    <span class="qunar-ticket-desctag-icon">☜</span>
-                    {{item.subTitleTop}}}
-                  </span>
-                  <span class="qunar-ticket-desctag">
-                    <span class="qunar-ticket-desctag-icon">☜</span>
-                    {{item.subTitleMiddle}}
-                  </span>
-                </ul>
-              </div>
-            </div><!--<div class="qunar-ticket-main">-->
-
-            <div class="qunar-ticket-side">
-              <a href="#" class="qunar-ticket-link">
-                <strong class="qunar-ticket-sale">
-                  ￥
-                  <em class="qunar-ticket-num">
-                    {{item.price}}
-                  </em>
-                </strong>
-                <em class="qunar-ticket-btn">
-                  预定
-                </em>
-              </a>
-            </div><!--div class="qunar-ticket-side">-->
-
-          </div><!--<div class="qunar-ticket-item">-->
-        </div><!--<div class="qunar-ticket-default">-->
-      </div>
 
       <div class="qunar-hide" v-for="(item, index) of showlist1" style="display:none;">
         <div class="qunar-ticket-con">
@@ -137,36 +61,42 @@
 </template>
 
 <script>
+  import HideList from './hidelist'
+  import axios from 'axios'
   export default {
     name: 'group',
+    components: {
+      HideList
+    },
     props: {
       list: Array,
-      hidelist: Array,
       showlist1: Array
     },
     data () {
       return {
         isShowDefault: false,
         isShowMore: false,
-        ishideMore: true
+        ishideMore: true,
+        hideList: []
       }
     },
     methods: {
-      handleShowDefault (index) {
-        const qunarshow = document.getElementsByClassName('qunar-for')[index]
-        if (qunarshow.style.display === 'block') {
-          qunarshow.style.display = 'none'
-        } else {
-          qunarshow.style.display = 'block'
-        }
+      getShowGroupInfo () {
+        axios.get('/api/group.json')
+             .then(this.handleGetGroupSucc.bind(this))
+             .catch(this.handleGetGroupErr.bind(this))
       },
-      handleShowDefault1 (index) {
-        const qunarshow = document.getElementsByClassName('qunar-for1')[index]
-        if (qunarshow.style.display === 'block') {
-          qunarshow.style.display = 'none'
-        } else {
-          qunarshow.style.display = 'block'
-        }
+      handleGetGroupSucc (res) {
+        const data = res.data.data
+        this.hideList = data.hideList
+        console.log(this.hideList)
+      },
+      handleGetGroupErr () {
+        console.log('error')
+      },
+      handleShowDefault (index) {
+        const qunarshow = this.$refs.qunarfor
+        console.log(qunarshow)
       },
       handleShowMore (index) {
         const qunarhide = document.getElementsByClassName('qunar-hide')[index]
@@ -178,6 +108,9 @@
         }
         this.ishideMore = !this.ishideMore
       }
+    },
+    created () {
+      this.getShowGroupInfo()
     }
   }
 </script>
@@ -246,90 +179,7 @@
           .qunar-ticket-numword
             display: inline-block
             color: #9e9e9e
-            font-size: .24rem    
-    .qunar-ticket-default
-      border-bottom: 1px solid #ddd    
-      .qunar-ticket-item
-        display: flex
-        position: relative
-        padding: .25rem
-        width: 100%
-        box-sizing: border-box
-        background: #f5f5f5
-        .qunar-ticket-main
-          flex: 2.92
-          width: .02rem
-          align-items: center
-          .qunar-ticket-onedayitem
-            display: inline-block
-            overflow: hidden
-            padding-left: 0
-            padding-right: 0
-            line-height: .34rem
-            max-width: 2.5rem
-            padding: 0 .2rem
-            white-space: nowrap
-            text-overflow: ellipsis
-            color: #666
-          .qunar-ticket-onedayitem-title
-            padding-top: 0
-            padding: .08rem 0
-            line-height: .36rem
-            overflow: hidden
-            text-overflow: ellipsis
-            color: #888
-            font-size: .24rem
-          .qunar-ticket-light
-            overflow: hidden
-            .qunar-ticket-desctag
-              display: inline-block
-              margin-right: .24rem
-              line-height: .32rem
-              color: #616161
-              font-size: .24rem
-              white-space: nowrap
-              .qunar-ticket-desctag-icon
-                display: inline-block
-                margin-right: .08rem
-                color: #1ba9ba
-                font-size: .2rem
-        .qunar-ticket-side
-          display: flex
-          align-items: center
-          flex: 1
-          position: relative
-          width: .02rem
-          .qunar-ticket-link
-            box-sizing: border-box
-            display: block
-            padding-left: .2rem
-            width: 100%
-            color: #00afc7
-            text-decoration: none
-            .qunar-ticket-sale
-              display: block
-              overflow: hidden
-              line-height: .28rem
-              height: .28rem
-              font-size: .24rem
-              text-align: center
-              color: #ff9800
-              .qunar-ticket-num
-                margin-left: .04rem
-                font-size: .32rem
-                line-height: .3rem
-                color: #ff9800
-                text-align: center
-            .qunar-ticket-btn
-              display: block;
-              overflow: hidden
-              line-height: .6rem
-              height: .6rem
-              text-align: center  
-              color: #fff
-              font-size: .28rem
-              background: #ff9800
-              border-radius: .06rem
+            font-size: .24rem       
     .qunarshowmore
       display: block
     .qunarhidemore
@@ -347,7 +197,5 @@
         margin-left: .1rem
         color: #616161
         font-size: .2rem
-      
-            
-          
+     
 </style>
