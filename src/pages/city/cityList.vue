@@ -3,7 +3,7 @@
 	 	<div class="location-containner">
 			<h6 class="area-title">您的位置</h6>
 			<div class="location">
-				<div class="location-city citySelect"  ref="selectCity">{{$store.state.city}}</div>
+				<div class="location-city citySelect"  ref="selectCity">{{city}}</div>
 			</div>
 		</div>
 		<div class="hotCity-containner">
@@ -28,15 +28,20 @@
  	</div>
 </template>
 <script>
+  import { mapState, mapMutations } from 'vuex'
   export default {
     name: 'cityList',
     props: {
       hotCityInfo: Array,
       domesticCityList: Array
     },
+    computed: {
+      ...mapState(['city'])
+    },
     methods: {
+      ...mapMutations(['changeCity']),
       handleCityClickChange (e) {
-        this.$store.commit('changeCity', e.target.innerHTML)
+        this.changeCity(e.target.innerText)
         this.$router.go(-1)
       },
       handleCityClickRolling (e) {
