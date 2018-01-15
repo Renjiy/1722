@@ -5,7 +5,7 @@
       <span class="iconfont search-icon">&#xe632;</span>请输入搜索内容
     </div>
     <div class="city" @click="handleClick">
-      {{city}}
+      {{$store.getters.doubleCity}}
     </div>
   </div>
 </template>
@@ -13,7 +13,6 @@
 <script>
 export default {
   name: 'index-header',
-  props: ['city'],
   methods: {
     handleClick () {
       this.$router.push('/city')

@@ -3,19 +3,24 @@
 	 	<div class="location-containner">
 			<h6 class="area-title">您的位置</h6>
 			<div class="location">
-				<div class="location-city citySelect"  ref="selectCity">{{city}}</div>
+				<div class="location-city citySelect"  ref="selectCity">{{$store.state.city}}</div>
 			</div>
 		</div>
 		<div class="hotCity-containner">
 			<h6 class="area-title">热门城市</h6>
 			<div class="hotCity location">
-				<div class="hotCity-city location-city" v-for="item of hotCityInfo" @click="handleClick">{{item.city}}</div>
+				<div class="hotCity-city location-city"
+             v-for="item of hotCityInfo"
+             @click="handleClick">
+           {{item.city}}
+        </div>
 			</div>
 		</div>
 		<div class="DomesticCityList-container">
 			<div v-for="city of domesticCityList">
 				<h6 class="area-title">{{city[0]}}</h6>
-				<div class="Inland-cityList" v-for="item of city[1]">{{item.cityarea}}</div>
+				<div class="Inland-cityList" v-for="item of city[1]">   {{item.cityarea}}
+        </div>
 			</div>
 		</div>
 		<div class="selector">
@@ -28,13 +33,11 @@
     name: 'cityList',
     props: {
       hotCityInfo: Array,
-      domesticCityList: Array,
-      city: String
+      domesticCityList: Array
     },
     methods: {
       handleClick (e) {
-        localStorage.city = e.target.innerHTML
-        this.$bus.$emit('change', e.target.innerHTML)
+        this.$store.commit('changeCity', e.target.innerHTML)
         this.$router.go(-1)
       }
     }
@@ -91,5 +94,4 @@
 			line-height: .33rem
 			padding-right: 0.1rem
 			text-align: center
-
 </style>
