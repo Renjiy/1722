@@ -16,6 +16,12 @@ module.exports = {
         pathRewrite: {
           '/api': '/static'
         }
+      },
+      '/daytrip': {
+        target: 'http://localhost:8080/#/daytrip',
+        pathRewrite: {
+          '/api': '/static'
+        }
       }
     },
 
