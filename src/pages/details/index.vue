@@ -6,7 +6,7 @@
     <announce></announce>
     <list></list>
     <fadein></fadein>
-    <group :list="groupList" :hidelist="hideList"></group>
+    <group :list="groupList" :hidelist="hideList" :showlist1="showList1"></group>
   </div>
 </template>
 
@@ -25,7 +25,8 @@
       return {
         showList: [],
         groupList: [],
-        hideList: []
+        hideList: [],
+        showList1: []
       }
     },
     components: {
@@ -57,6 +58,8 @@
         const data = res.data.data
         this.groupList = data.groupList
         this.hideList = data.hideList
+        this.showList1 = data.showList1
+        console.log(data.showList1)
       },
       handleGetGroupErr () {
         console.log('error')

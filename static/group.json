@@ -83,7 +83,7 @@
       "subTitleBottom": "",
       "price": "40"
       }, {
-        "id": "1003",
+      "id": "1003",
       "title": "爱上旅游网",
       "titleTop": "下午场",
       "titleMiddle": "故宫成人票【电子票，提前一天预订】",
@@ -92,6 +92,12 @@
       "subTitleMiddle": "条件退",
       "subTitleBottom": "",
       "price": "40"
+    }], 
+    "showList1": [{
+      "id": "1001",
+      "titleBottom": "故宫+珍宝馆+针表馆",
+      "subTitleBottom": "凭身份证入园",
+      "priceBottom": "30"
     }]
   } 
 }

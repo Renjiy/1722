@@ -58,7 +58,7 @@
         </div><!--<div class="qunar-ticket-default">-->
       </div>
 
-      <div class="qunar-ticket-con">
+      <div class="qunar-ticket-con" @click="handleShowDefault1(index)">
         <div class="qunar-ticket-con-info">
           <h5 class="qunar-ticket-name">
             {{item.titleMiddle}}
@@ -72,19 +72,60 @@
         </div><!--<div class="qunar-ticket-con-info">-->
       </div><!--<div class="qunar-ticket-con">-->
 
-      <div class="qunar-ticket-con qunar-ticket-hide">
-        <div class="qunar-ticket-con-info">
-          <h5 class="qunar-ticket-name">
-            {{item.titleBottom}}
-            <span class="qunar-ticket-subname">{{item.subTitleBottom}}</span>
-          </h5>
-          <div class="qunar-ticket-price">
-            ￥
-            <em class="qunar-ticket-price-num">{{item.priceBottom}}</em>
-            <span class="qunar-ticket-numword">起</span>
-          </div>
-        </div><!--<div class="qunar-ticket-con-info">-->
-      </div><!--<div class="qunar-ticket-con">-->
+      <div class="qunar-for1" style="display:none;">
+        <div class="qunar-ticket-default" v-for="(item, index) of hidelist" :key="item.id">
+          <div class="qunar-ticket-item">
+            <div class="qunar-ticket-main">
+              <div>
+                <span class="qunar-ticket-onedayitem">{{item.title}}</span>
+                <h6 class="qunar-ticket-onedayitem-title">{{item.titleMiddle}}</h6>
+                <ul class="qunar-ticket-light"></ul>
+                <ul class="qunar-ticket-light">
+                  <span class="qunar-ticket-desctag">
+                    <span class="qunar-ticket-desctag-icon">☜</span>
+                    {{item.subTitleTop}}}
+                  </span>
+                  <span class="qunar-ticket-desctag">
+                    <span class="qunar-ticket-desctag-icon">☜</span>
+                    {{item.subTitleMiddle}}
+                  </span>
+                </ul>
+              </div>
+            </div><!--<div class="qunar-ticket-main">-->
+
+            <div class="qunar-ticket-side">
+              <a href="#" class="qunar-ticket-link">
+                <strong class="qunar-ticket-sale">
+                  ￥
+                  <em class="qunar-ticket-num">
+                    {{item.price}}
+                  </em>
+                </strong>
+                <em class="qunar-ticket-btn">
+                  预定
+                </em>
+              </a>
+            </div><!--div class="qunar-ticket-side">-->
+
+          </div><!--<div class="qunar-ticket-item">-->
+        </div><!--<div class="qunar-ticket-default">-->
+      </div>
+
+      <div class="qunar-hide" v-for="(item, index) of showlist1" style="display:none;">
+        <div class="qunar-ticket-con">
+          <div class="qunar-ticket-con-info">
+            <h5 class="qunar-ticket-name">
+              {{item.titleBottom}}
+              <span class="qunar-ticket-subname">{{item.subTitleBottom}}</span>
+            </h5>
+            <div class="qunar-ticket-price">
+              ￥
+              <em class="qunar-ticket-price-num">{{item.priceBottom}}</em>
+              <span class="qunar-ticket-numword">起</span>
+            </div>
+          </div><!--<div class="qunar-ticket-con-info">-->
+        </div><!--<div class="qunar-ticket-con">-->
+      </div>
 
       <div class="qunar-ticket-more" @click="handleShowMore(index)" :class="{ qunarhidemore:!ishideMore }">
         查看剩余产品
@@ -100,7 +141,8 @@
     name: 'group',
     props: {
       list: Array,
-      hidelist: Array
+      hidelist: Array,
+      showlist1: Array
     },
     data () {
       return {
@@ -118,8 +160,22 @@
           qunarshow.style.display = 'block'
         }
       },
+      handleShowDefault1 (index) {
+        const qunarshow = document.getElementsByClassName('qunar-for1')[index]
+        if (qunarshow.style.display === 'block') {
+          qunarshow.style.display = 'none'
+        } else {
+          qunarshow.style.display = 'block'
+        }
+      },
       handleShowMore (index) {
-        this.isShowMore = !this.isShowMore
+        const qunarhide = document.getElementsByClassName('qunar-hide')[index]
+        console.log(qunarhide)
+        if (qunarhide.style.display === 'block') {
+          qunarhide.style.display = 'none'
+        } else {
+          qunarhide.style.display = 'block'
+        }
         this.ishideMore = !this.ishideMore
       }
     }
@@ -191,8 +247,6 @@
             display: inline-block
             color: #9e9e9e
             font-size: .24rem    
-    .qunar-ticket-hide
-      display: none
     .qunar-ticket-default
       border-bottom: 1px solid #ddd    
       .qunar-ticket-item
