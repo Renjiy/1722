@@ -19,8 +19,8 @@
         </div><!--<div class="qunar-ticket-con-info">-->
       </div><!--<div class="qunar-ticket-con">-->
       
-      <div class="qunar-for" v-for="(item, index) of hidelist" :key="item.id">
-        <div class="qunar-ticket-default">
+      <div class="qunar-for" style="display:none;">
+        <div class="qunar-ticket-default" v-for="(item, index) of hidelist" :key="item.id">
           <div class="qunar-ticket-item">
             <div class="qunar-ticket-main">
               <div>
@@ -111,7 +111,12 @@
     },
     methods: {
       handleShowDefault (index) {
-        console.log(index)
+        const qunarshow = document.getElementsByClassName('qunar-for')[index]
+        if (qunarshow.style.display === 'block') {
+          qunarshow.style.display = 'none'
+        } else {
+          qunarshow.style.display = 'block'
+        }
       },
       handleShowMore (index) {
         this.isShowMore = !this.isShowMore
