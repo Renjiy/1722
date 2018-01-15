@@ -47,11 +47,7 @@
       handleCityClickRolling (e) {
         this.target = e.target
         const name = this.target.innerHTML
-        if (document.documentElement.scrollTop) {
-          document.documentElement.scrollTop = this.$refs[name][0].offsetTop - 45
-        } else {
-          document.body.scrollTop = this.$refs[name][0].offsetTop - 45
-        }
+        document.documentElement.scrollTop = this.$refs[name][0].offsetTop - 45
       }
     }
   }
