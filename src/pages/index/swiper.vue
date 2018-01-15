@@ -22,6 +22,11 @@
           pagination: '.swiper-pagination'
         }
       }
+    },
+    computed: {
+      hasSwiper () {
+        return !!this.list.length
+      }
     }
   }
 </script>

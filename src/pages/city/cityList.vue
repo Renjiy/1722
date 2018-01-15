@@ -3,13 +3,17 @@
 	 	<div class="location-containner">
 			<h6 class="area-title">您的位置</h6>
 			<div class="location">
-				<div class="location-city city-select">{{city}}</div>
+				<div class="location-city citySelect"  ref="selectCity">{{$store.state.city}}</div>
 			</div>
 		</div>
 		<div class="hotCity-containner">
 			<h6 class="area-title">热门城市</h6>
 			<div class="hot-city location">
-				<div class="hotCity-city location-city" v-for="item of hotCityInfo" @click="handleCityClickChange">{{item.city}}</div>
+				<div class="hotCity-city location-city"
+             v-for="item of hotCityInfo"
+             @click="handleCityClickChange">
+           {{item.city}}
+        </div>
 			</div>
 		</div>
 		<div class="DomesticCityList-container">
@@ -28,13 +32,11 @@
     name: 'cityList',
     props: {
       hotCityInfo: Array,
-      domesticCityList: Array,
-      city: String
+      domesticCityList: Array
     },
     methods: {
       handleCityClickChange (e) {
-        const city = e.target.innerHTML
-        this.$bus.$emit('change', city)
+        this.$store.commit('changeCity', e.target.innerHTML)
         this.$router.go(-1)
       },
       handleCityClickRolling (e) {
@@ -59,7 +61,7 @@
 	.location
 		background: #fff
 		overflow: hidden
-		padding: .04rem .5rem .26rem .2rem	
+		padding: .04rem .5rem .26rem .2rem
 		.location-city
 			box-sizing: border-box
 			border: .02rem solid #c9cccd
@@ -93,11 +95,11 @@
 	.selector
 		position: fixed
 		right: 0
-		top: 22%	
+		top: 22%
 		.selector-item
 			color: #00afc7
 			font-size: .24rem
 			line-height: .33rem
 			padding-right: 0.1rem
-			text-align: center		
+			text-align: center
 </style>

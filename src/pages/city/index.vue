@@ -5,9 +5,7 @@
 	  <city-show v-if="show" :showCity="showCity"></city-show>
 	  <city-list :hotCityInfo="hotCityInfo"
                :domesticCityList="domesticCityList"
-               :city="city"
-                v-else>
-	  </city-list>
+    ></city-List>
   </div>
 </template>
 
@@ -29,15 +27,13 @@
       return {
         hotCityInfo: [],
         domesticCityList: [],
-        city: '',
         showCity: [],
-        show: false
+        show: true
       }
     },
     methods: {
       getCityListData () {
-        const city = localStorage.city ? localStorage.city : ' '
-        axios.get('/api/cityList.json?city=' + city)
+        axios.get('/api/cityList.json?city=' + this.$store.state.city)
           .then(this.handleGetDataSucc.bind(this))
           .catch(this.handleGetDataErr.bind(this))
       },
@@ -45,9 +41,6 @@
         const data = res.data.data
         this.hotCityInfo = data.hotcity
         this.domesticCityList = data.china
-        this.city = data.city
-        this.$bus.$emit('change', data.city)
-        localStorage.city = data.city
       },
       handleGetDataErr () {
         console.log('error')
