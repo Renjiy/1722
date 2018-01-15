@@ -3,7 +3,8 @@
 	  <city-header></city-header>
 	  <city-search  @searchCity="handleShowCity"></city-search>
 	  <city-show v-if="show" :showCity="showCity"></city-show>
-	  <city-list :hotCityInfo="hotCityInfo"
+	  <city-list v-else
+	  					 :hotCityInfo="hotCityInfo"
                :domesticCityList="domesticCityList"
     ></city-List>
   </div>
@@ -28,7 +29,7 @@
         hotCityInfo: [],
         domesticCityList: [],
         showCity: [],
-        show: true
+        show: false
       }
     },
     methods: {

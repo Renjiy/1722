@@ -9,7 +9,7 @@ const store = new Vuex.Store({
   },
   getters: {
     doubleCity (state) {
-      return state.city 
+      return state.city + state.city
     }
   },
   actions: {
