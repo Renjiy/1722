@@ -1,21 +1,29 @@
 <template>
-  <div class="header">
+  <div class="header" ref="header">
     <div class="back iconfont">&#xe624;</div>
     <div class="search">
       <span class="iconfont search-icon">&#xe632;</span>请输入搜索内容
     </div>
     <div class="city" @click="handleClick">
-      {{$store.getters.doubleCity}}
+      {{doubleCity}}
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'index-header',
+  computed: {
+    ...mapGetters(['doubleCity'])
+  },
   methods: {
     handleClick () {
+      this.$refs.header.style.backgroundColor = 'red'
       this.$router.push('/city')
+    },
+    sayHello () {
+      alert('hello')
     }
   }
 }
