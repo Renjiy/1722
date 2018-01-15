@@ -112,8 +112,6 @@
     methods: {
       handleShowDefault (index) {
         console.log(index)
-        const qunarshow = document.querySelectorAll('qunarshow')[index]
-        console.log(ctrlDiv)
       },
       handleShowMore (index) {
         this.isShowMore = !this.isShowMore
