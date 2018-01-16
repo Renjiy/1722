@@ -1,25 +1,86 @@
 <template>
   <div class="qn_footer">
     <div class="main_nav_wrapper">
-      <ul class="main_nav" id="qunarFooterUL">
+      <ul class="main_nav" ref="list">
         <li class="flight">
-          <a href="//touch.qunar.com/h5/flight/">
+          <a href="#">
             <div class="icon"></div>
             <span class="title">机票</span>
           </a>
         </li>
-        <li class="hotel"><a href="//touch.qunar.com/h5/hotel/"><div class="icon"></div><span class="title">酒店</span></a></li>
-        <li class="gongyu"><a href="//touch.qunar.com/h5/hotel/"><div class="icon"></div><span class="title">公寓</span></a></li>
-        <li class="tuan"><a href="http://touch.qunar.com/h5/group/grouplist"><div class="icon"></div><span class="title">团购</span></a></li>
-        <li class="train"><a href="http://touch.qunar.com/h5/train/"><div class="icon"></div><span class="title">火车票</span></a></li>
-        <li class="jingdian actived"><div class="icon"></div><span class="title">景点</span></li>
-        <li class="zuche"><a href="http://car.qunar.com/?from=10"><div class="icon"></div><span class="title">接送机</span></a></li>
-        <li class="dujia"><a href="//touch.dujia.qunar.com"><div class="icon"></div><span class="title">度假</span></a></li>
-        <li class="gonglue"><a href="http://touch.travel.qunar.com/"><div class="icon"></div><span class="title">攻略</span></a></li>
-        <li class="lvtu"><a href="http://touch.lvtu.qunar.com"><div class="icon"></div><span class="title">旅图</span></a></li>
-        <li class="cheche"><a href="http://cheche.qunar.com/?from=28"><div class="icon"></div><span class="title">车车</span></a></li>
-        <li class="dangdiren"><a href="http://dangdi.qunar.com/touch/localman/city-list"><div class="icon"></div><span class="title">当地人</span></a></li>
-        <li class="tag toggle" id="qnFooterToggle" style="top: 97px;"><span>收起</span></li>
+        <li class="hotel">
+          <a href="#">
+            <div class="icon" style="background-position: -25px 0;"></div>
+            <span class="title">酒店</span>
+          </a>
+        </li>
+        <li class="gongyu">
+          <a href="#">
+            <div class="icon" style="background-position: -150px 0px;"></div>
+            <span class="title">公寓</span>
+          </a>
+        </li>
+        <li ref="gd">
+          <a href="javascript:void(0);">
+            <div style="background-position: -50px 0;"></div>
+            <span class="title"  @click="handleClick" >更多</span>
+          </a>
+        </li>
+        <li class="tuan">
+          <a href="#">
+            <div class="icon" style="background-position: -50px 0;"></div>
+            <span class="title">团购</span>
+          </a>
+        </li>
+        <li class="train">
+          <a href="#">
+            <div class="icon" style="background-position: -50px -25px;"></div>
+            <span class="title">火车票</span>
+          </a>
+        </li>
+        <li class="jingdian actived">
+          <a href="#">
+            <div class="icon" style="background-position: -75px 0;"></div>
+            <span class="title">景点</span>
+          </a>
+        </li>
+        <li class="zuche">
+          <a href="#">
+            <div class="icon" style="background-position: -100px 0;"></div>
+            <span class="title">接送机</span>
+          </a>
+        </li>
+        <li class="dujia">
+          <a href="#">
+            <div class="icon" style="background-position: 0 -25px;"></div>
+            <span class="title">度假</span>
+          </a>
+        </li>
+        <li class="gonglue">
+          <a href="#">
+            <div class="icon" style="background-position: -75px -25px;"></div>
+            <span class="title">攻略</span>
+          </a>
+        </li>
+        <li class="lvtu">
+          <a href="#">
+            <div class="icon" style="background-position: -100px -25px;"></div>
+            <span class="title">旅图</span>
+          </a>
+        </li>
+        <li class="cheche">
+          <a href="#">
+            <div class="icon" style="background-position: -125px 0;"></div>
+            <span class="title">车车</span>
+          </a>
+        </li>
+        <li class="dangdiren">
+          <a href="#">
+            <div class="icon" style="background-position: -125px -25px;"></div>
+            <span class="title">当地人</span>
+          </a>
+        </li>
+        <li class="tag toggle" style="top: 97px;"><span @click="StopClick">收起</span></li>
       </ul>
     </div>
     <ul class="footer_nav clearfix" id="qunarFooterBottom">
@@ -33,6 +94,10 @@
         <li class="active"><a href="">触屏版</a></li>
         <li><a href="">电脑版</a></li>
     </ul>
+    <div class="copyright">
+      <span>Qunar 京ICP备05021087</span>
+      <a class="qn_ml25" href="//touch.qunar.com/h5/feedback">意见反馈</a>
+    </div>
   </div>
 </template>
 <script>
@@ -40,6 +105,16 @@
     name: 'weekend-trip',
     props: {
       list: Array
+    },
+    methods: {
+      handleClick () {
+        this.$refs.list.style.height = 2.2 + 'rem'
+        this.$refs.gd.style.display = 'none'
+      },
+      StopClick () {
+        this.$refs.list.style.height = 0.6 + 'rem'
+        this.$refs.gd.style.display = 'block'
+      }
     }
   }
 </script>
@@ -48,48 +123,70 @@
     background: #f3f3f3
     .main_nav
       position: relative
-      width: 300px
-      height: 25px
+      width: 6rem
+      height: .5rem
       margin: 0 auto
-      padding: 10px 10px 0 10px
+      padding: .2rem .2rem 0 .2rem
       overflow: hidden
-    li
-      margin: 0px
-      padding-left: 10px
-      height: 31px
-      width: 65px
-      float: left
-      position: relative
-      background: none
-    a
-      display: block
-      height: 22px
-      width: 100%
-      font-size: 12px
-      .icon
+      li
+        margin: 0px
+        padding-left: .2rem
+        height: .62rem
+        width: 1.3rem
         float: left
-        width: 22px
-        height: 22px
-        background: url(//source.qunarzz.com/site/images/wap/touch/images/v2/images2x/nav_7.png) 0 0 no-repeat
-        background-size: 175px 50px
-      .title
-        float: left
-        display: inline-block
+        position: relative
+        background: none
+       a
+         display: block
+         height: .44rem
+         width: 100%
+         font-size: .24rem
+         .icon
+            float: left
+            width: .44rem
+            height: .44rem
+            background: url(//source.qunarzz.com/site/images/wap/touch/images/v2/images2x/nav_7.png) 0 0 no-repeat
+            background-size: 3.5rem 1rem
+           .title
+             float: left
+             display: inline-block
+             color: #9e9e9e
+             margin: .06rem 0 0 .1rem
+             border-bottom: .02rem solid #acacac
+             font-size: .24rem
+      .tag
+        position: absolute
+        top: .16rem
+        right: .12rem
+        background: #f3f3f3
+        font-size: .28rem
         color: #9e9e9e
-        margin: 3px 0 0 5px
-        border-bottom: 1px solid #acacac
-        font-size: 12px
+        text-align:center
+        width: 1.4rem
     .footer_nav
       width: 100%
-      height: 39px
-      border-bottom: 1px solid #cacaca
-    li
-      float: left
-      padding-left: 20px
-    a
-      position: relative;
-      color: #25a4bb;
-      font-size: 14px;
-      line-height: 39px;
-
+      height: .78rem
+      border-bottom: .02rem solid #cacaca
+      li
+        float: left
+        padding-left: .4rem
+        a
+          position: relative
+          color: #25a4bb
+          font-size: .28rem
+          line-height: .78rem
+    .mobile_pc
+      padding: .2rem 0 0 0
+      text-align: center
+      li
+        display: inline-block
+        margin: 0 .3rem
+    .copyright
+      color: #9e9e9e
+      text-align: center
+      font-size: .28rem
+      padding: .2rem
+      a
+        color: #9e9e9e
+        height: .66rem
 </style>
