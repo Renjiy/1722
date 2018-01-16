@@ -35,8 +35,9 @@ export default {
   .foot
     height: .6rem
     .foot-cont
-      display: inline-block
+      overflow: auto
       margin: 0 auto
+      width: 30%
       .left
         float: left
         width: 1rem
@@ -51,5 +52,4 @@ export default {
         border: .02rem solid #ccc
         text-align: center
         line-height: .5rem
-      
 </style>

@@ -1,16 +1,15 @@
 <template>
   <div class="details">
-    <ul class="details-ul" v-for="(page, index) of pageList" :key="index">
-      <li class="details-li"  v-for="item of page" :key="item.id">
-        <div>
-          <img class="details-img" :src="item.imgUrl">
+    <swiper :options="swiperOption" >
+      <swiper-slide v-for="(page, index) of pageList" :key="index">
+        <div class="area-con">
+          <div class="arae-item" v-for="item of page" :key="item.id">
+            <img class="img" :src="item.imgUrl"/>
+            <p class="title">{{item.title}}</p>
+          </div>
         </div>
-        <div class="details-info">
-          {{item.title}}
-          {{item.price}}
-        </div>
-      </li>
-    </ul>
+      </swiper-slide>
+    </swiper>
   </div>
 </template>
 
@@ -19,6 +18,13 @@ export default {
   name: 'day-trip-details',
   props: {
     list: Array
+  },
+  data () {
+    return {
+      swiperOption: {
+        pagination: '.swiper-pagination'
+      }
+    }
   },
   computed: {
     pageList () {
@@ -29,9 +35,13 @@ export default {
           pages[page] = []
         }
         pages[page].push(value)
-        console.log(page + 1)
       })
       return pages
+    }
+  },
+  methods: {
+    addClick: function () {
+      console.log(this.page)
     }
   }
 }
@@ -39,18 +49,14 @@ export default {
 
 <style lang="stylus" scoped>
   @import "../../assets/stylus/varibles.styl";
-  .details
-    overflow: hidden
-    height: 20rem
-    .details-ul
-      margin-bottom: .2rem
-      .details-li
-        display: flex
-        padding: .2rem
-        .details-img
-          width: 1.6rem
-          height: 1.6rem
-          margin-right: .2rem
-        .details-info
-          border-bottom: .02rem solid #ccc
+  .arae-item
+    display: flex
+    margin-top: .2rem
+    border-bottom: .02rem solid #ccc
+    .img
+      width: 1.6rem
+      height: 1.6rem
+    .title
+      font-size: .26rem
+      margin-left: .22rem
 </style>

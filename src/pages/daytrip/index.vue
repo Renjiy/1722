@@ -1,7 +1,7 @@
 <template>
   <div>
     <day-trip-header></day-trip-header>
-    <day-trip-tab></day-trip-tab>
+    <day-trip-tab ></day-trip-tab>
     <day-trip-details :list="detailsInfo"></day-trip-details>
     <day-trip-foot></day-trip-foot>
   </div>
@@ -37,7 +37,6 @@
       handleGetDataSucc (res) {
         const data = res.data.data
         this.detailsInfo = data.datailsList
-        console.log(this.detailsInfo)
       },
       handleGetDataErr () {
         console.log('error')
