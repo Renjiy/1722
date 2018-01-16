@@ -1,6 +1,6 @@
 <template>
-  <div class="qunar-for" style="display:none;" :ref="qunarfor">
-      <div class="qunar-ticket-default" v-for="(item, index) of hidelist" :key="item.id">
+  <div class="qunar-for" ref="qunarhide">
+      <div class="qunar-ticket-default" v-for="item of grouplist" :key="item.id">
         <div class="qunar-ticket-item">
           <div class="qunar-ticket-main">
             <div>
@@ -43,7 +43,7 @@
   export default {
     name: 'hide-list',
     props: {
-      hidelist: Array
+      grouplist: Array
     }
   }
 </script>

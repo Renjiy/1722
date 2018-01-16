@@ -1,68 +1,36 @@
 <template>
   <div>
-    <div class="qunar-ticket-group" v-for="(item, index) of list" :key="item.id">
+    <div class="qunar-ticket-group" :key="item.id" v-for="(item, index) of ticketList">
       <h3 class="qunar-ticket-type">
         <span class="qunar-ticket-type-icon"></span>
-        {{item.title}}
+        {{item.name}}
       </h3>
-      <div class="qunar-ticket-con" @click="handleShowDefault(index)">
-        <div class="qunar-ticket-con-info">
-          <h5 class="qunar-ticket-name">
-            {{item.titleTop}}
-            <span class="qunar-ticket-subname">{{item.subTitleTop}}</span>
-          </h5>
-          <div class="qunar-ticket-price">
-            ￥
-            <em class="qunar-ticket-price-num">{{item.priceTop}}</em>
-            <span class="qunar-ticket-numword">起</span>
-          </div>
-        </div><!--<div class="qunar-ticket-con-info">-->
-      </div><!--<div class="qunar-ticket-con">-->
-
-      <hide-list :hidelist="hideList"></hide-list>
-      
-      <div class="qunar-ticket-con" @click="handleShowDefault1(index)">
-        <div class="qunar-ticket-con-info">
-          <h5 class="qunar-ticket-name">
-            {{item.titleMiddle}}
-            <span class="qunar-ticket-subname">{{item.subTitleMiddle}}</span>
-          </h5>
-          <div class="qunar-ticket-price">
-            ￥
-            <em class="qunar-ticket-price-num">{{item.priceMiddle}}</em>
-            <span class="qunar-ticket-numword">起</span>
-          </div>
-        </div><!--<div class="qunar-ticket-con-info">-->
-      </div><!--<div class="qunar-ticket-con">-->
-
-      <div class="qunar-hide" v-for="(item, index) of showlist1" style="display:none;">
-        <div class="qunar-ticket-con">
+      <div v-for="(itemlist, indexl) of item.list1"
+           v-show="itemlist.show">
+        <div class="qunar-ticket-con" @click="handleShowDefault(index, indexl)">
           <div class="qunar-ticket-con-info">
             <h5 class="qunar-ticket-name">
-              {{item.titleBottom}}
-              <span class="qunar-ticket-subname">{{item.subTitleBottom}}</span>
+              {{itemlist.titleTop}}
+              <span class="qunar-ticket-subname">{{itemlist.subTitleTop}}</span>
             </h5>
             <div class="qunar-ticket-price">
               ￥
-              <em class="qunar-ticket-price-num">{{item.priceBottom}}</em>
+              <em class="qunar-ticket-price-num">{{itemlist.priceTop}}</em>
               <span class="qunar-ticket-numword">起</span>
             </div>
           </div><!--<div class="qunar-ticket-con-info">-->
         </div><!--<div class="qunar-ticket-con">-->
+        <hide-list :grouplist="itemlist.supliers" ref="qunarfor" v-show="itemlist.fff"></hide-list> 
       </div>
-
-      <div class="qunar-ticket-more" @click="handleShowMore(index)" :class="{ qunarhidemore:!ishideMore }">
+      <div class="qunar-ticket-more" @click="handleShowMore(index, $event)" v-if="item.hasMore">
         查看剩余产品
         <span class="qunar-ticket-more-icon">∨</span>
       </div>
     </div><!--<div class="qunar-ticket-group">-->
   </div>
-
 </template>
-
 <script>
   import HideList from './hidelist'
-  import axios from 'axios'
   export default {
     name: 'group',
     components: {
@@ -70,51 +38,37 @@
     },
     props: {
       list: Array,
-      showlist1: Array
+      showlist1: Array,
+      producelist: Array
     },
     data () {
       return {
         isShowDefault: false,
         isShowMore: false,
         ishideMore: true,
-        hideList: []
+        groupList: [],
+        ticketList: []
       }
     },
     methods: {
-      getShowGroupInfo () {
-        axios.get('/api/group.json')
-             .then(this.handleGetGroupSucc.bind(this))
-             .catch(this.handleGetGroupErr.bind(this))
+      handleShowDefault (index, indexl) {
+        this.ticketList[index].list1[indexl].fff = !this.ticketList[index].list1[indexl].fff
       },
-      handleGetGroupSucc (res) {
-        const data = res.data.data
-        this.hideList = data.hideList
-        console.log(this.hideList)
-      },
-      handleGetGroupErr () {
-        console.log('error')
-      },
-      handleShowDefault (index) {
-        const qunarshow = this.$refs.qunarfor
-        console.log(qunarshow)
-      },
-      handleShowMore (index) {
-        const qunarhide = document.getElementsByClassName('qunar-hide')[index]
-        console.log(qunarhide)
-        if (qunarhide.style.display === 'block') {
-          qunarhide.style.display = 'none'
-        } else {
-          qunarhide.style.display = 'block'
-        }
-        this.ishideMore = !this.ishideMore
+      handleShowMore (index, e) {
+        e.target.style.display = 'none'
+        this.ticketList[index].list1 = this.ticketList[index].list1.map((value, index) => {
+          value.show = true
+          return value
+        })
       }
     },
-    created () {
-      this.getShowGroupInfo()
+    watch: {
+      list () {
+        this.ticketList = JSON.parse(JSON.stringify(this.list))
+      }
     }
   }
 </script>
-
 <style lang="stylus" scoped>
   .qunar-ticket-group
     margin-top: .2rem
@@ -180,10 +134,6 @@
             display: inline-block
             color: #9e9e9e
             font-size: .24rem       
-    .qunarshowmore
-      display: block
-    .qunarhidemore
-      display: none
     .qunar-ticket-more
       position: relative
       z-index: 2
@@ -196,6 +146,5 @@
       .qunar-ticket-more-icon
         margin-left: .1rem
         color: #616161
-        font-size: .2rem
-     
+        font-size: .2rem   
 </style>

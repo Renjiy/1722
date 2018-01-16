@@ -6,7 +6,7 @@
     <announce></announce>
     <list></list>
     <fadein></fadein>
-    <group :list="groupList" :showlist1="showList1"></group>
+    <group :list="groupList" :showlist1="showList1" :producelist="produceList"></group>
   </div>
 </template>
 
@@ -26,7 +26,8 @@
         showList: [],
         groupList: [],
         hideList: [],
-        showList1: []
+        showList1: [],
+        produceList: []
       }
     },
     components: {
@@ -43,24 +44,16 @@
         axios.get('/api/details.json')
              .then(this.handleGetShowImgSucc.bind(this))
              .catch(this.handleGetShowImgErr.bind(this))
-        axios.get('/api/group.json')
-             .then(this.handleGetGroupSucc.bind(this))
-             .catch(this.handleGetGroupErr.bind(this))
       },
       handleGetShowImgSucc (res) {
         const data = res.data.data
         this.showList = data.showImgList
-      },
-      handleGetShowImgErr () {
-        console.log('error')
-      },
-      handleGetGroupSucc (res) {
-        const data = res.data.data
         this.groupList = data.groupList
         this.hideList = data.hideList
         this.showList1 = data.showList1
+        this.produceList = data.produceList
       },
-      handleGetGroupErr () {
+      handleGetShowImgErr () {
         console.log('error')
       }
     },

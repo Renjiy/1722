@@ -1,43 +1,46 @@
 {
   "ret": true,
-  "data": {
+  "date": {
     "groupList": [{
       "id": "1001",
       "title": "故宫成人票",
-      "titleTop": "上午场",
-      "titleMiddle": "下午场",
+      "titleTop": "【上午场】成人票+故宫全景手绘地图",
+      "titleMiddle": "上午场成人票+自助导览器",
       "titleBottom": "故宫+珍宝馆+针表馆",
-      "subTitleTop": "凭身份证入园",
+      "subTitleTop": "先取图，再入宫",
       "subTitleMiddle": "凭身份证入园",
-      "subTitleBottom": "凭身份证入园",
-      "priceTop": "39.9",
-      "priceMiddle": "40",
-      "priceBottom": "60"
-    }, {
+      "subTitleBottom": "",
+      "priceTop": "50",
+      "priceMiddle": "60",
+      "priceBottom": "115"
+    },
+    {
       "id": "1002",
       "title": "故宫学生票",
-      "titleTop": "上午场",
-      "titleMiddle": "下午场",
+      "titleTop": "【上午场】成人票+故宫全景手绘地图",
+      "titleMiddle": "上午场成人票+自助导览器",
       "titleBottom": "故宫+珍宝馆+针表馆",
-      "subTitleTop": "凭身份证入园",
+      "subTitleTop": "先取图，再入宫",
       "subTitleMiddle": "凭身份证入园",
-      "subTitleBottom": "凭身份证入园",
-      "priceTop": "20",
-      "priceMiddle": "30",
-      "priceBottom": "30"
-    }, {
+      "subTitleBottom": "",
+      "priceTop": "50",
+      "priceMiddle": "60",
+      "priceBottom": "115"
+    },
+    {
       "id": "1003",
       "title": "故宫老人票",
-      "titleTop": "上午场",
-      "titleMiddle": "下午场",
+      "titleTop": "【上午场】成人票+故宫全景手绘地图",
+      "titleMiddle": "上午场成人票+自助导览器",
       "titleBottom": "故宫+珍宝馆+针表馆",
-      "subTitleTop": "凭身份证入园",
+      "subTitleTop": "先取图，再入宫",
       "subTitleMiddle": "凭身份证入园",
-      "subTitleBottom": "凭身份证入园",
-      "priceTop": "20",
-      "priceMiddle": "30",
-      "priceBottom": "30"
-    }, {
+      "subTitleBottom": "",
+      "priceTop": "50",
+      "priceMiddle": "60",
+      "priceBottom": "115"
+    },
+    {
       "id": "1004",
       "title": "热销产品组合",
       "titleTop": "【上午场】成人票+故宫全景手绘地图",
@@ -49,7 +52,8 @@
       "priceTop": "50",
       "priceMiddle": "60",
       "priceBottom": "115"
-    }, {
+    },
+    {
       "id": "1005",
       "title": "自助导览器",
       "titleTop": "中文版",
@@ -62,6 +66,24 @@
       "priceMiddle": "40",
       "priceBottom": "40"
     }],
+    "produceList": [{
+      "id": "1001",
+      "titleTop": "上午场",
+      "subTitleTop": "凭身份证入园",
+      "priceTop": "39.9"
+    },
+    {
+      "id": "1002",
+      "titleTop": "下午场",
+      "subTitleTop": "凭身份证入园",
+      "priceTop": "20"
+    },
+    {
+      "id": "1003",
+      "titleTop": "故宫+珍宝馆+针表馆",
+      "subTitleTop": "凭身份证入园",
+      "priceTop": "20"
+    }],
     "hideList": [{
       "id": "1001",
       "title": "去哪儿直销",
@@ -72,7 +94,8 @@
       "subTitleMiddle": "条件退",
       "subTitleBottom": "",
       "price": "40"
-    }, {
+    },
+    {
       "id": "1002",
       "title": "分燕票务",
       "titleTop": "上午场",
