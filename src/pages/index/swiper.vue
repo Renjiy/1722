@@ -1,6 +1,6 @@
 <template>
   <div class="slide-container">
-    <swiper :options="swiperOption">
+    <swiper :options="swiperOption" v-if="hasSwiper">
       <!-- slides -->
         <swiper-slide v-for="item of list" :key="item.id">     
           <img class="slide-img" :src="item.imgUrl" alt="">        
@@ -23,6 +23,11 @@
           autoplay: 2000,
           pagination: '.swiper-pagination'
         }
+      }
+    },
+    computed: {
+      hasSwiper () {
+        return !!this.list.length
       }
     }
   }

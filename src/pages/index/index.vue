@@ -1,12 +1,13 @@
 <template>
   <div>
-  	<index-header></index-header>
+  	<index-header :city="$store.state.city"></index-header>
   	<index-swiper :list="swiperInfo"></index-swiper>
   	<index-icons :icons="iconsList"></index-icons>
   </div>
 </template>
 
 <script>
+  import { mapState, mapMutations } from 'vuex'
   import IndexHeader from './header'
   import IndexSwiper from './swiper'
   import IndexIcons from './icons'
@@ -24,9 +25,18 @@
         iconsList: []
       }
     },
+    computed: {
+      ...mapState(['city'])
+    },
+    watch: {
+      city () {
+        this.getIndexData()
+      }
+    },
     methods: {
+      ...mapMutations(['changeCity']),
       getIndexData () {
-        axios.get('/api/index.json')
+        axios.get('/api/index.json?city=' + this.$store.state.city)
              .then(this.handleGetIndexDataSucc.bind(this))
              .catch(this.handleGetIndexDataError.bind(this))
       },
@@ -34,6 +44,9 @@
         const data = res.data.data
         this.swiperInfo = data.swiperList
         this.iconsList = data.iconList
+        if (!this.$store.state.city) {
+          this.$store.state.commit('changeCity', data.city)
+        }
       },
       handleGetIndexDataError () {
         console.log('没加载成功')

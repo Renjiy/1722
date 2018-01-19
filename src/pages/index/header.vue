@@ -4,18 +4,29 @@
     <div class="search">
       <span class="search-iconfont iconfont">&#xe632;</span>
       请输入搜索内容
-    </div>
-    <div class="city">
-    <router-link to="/daytrip/123">
-      乌鲁木齐
-    </router-link>
-    </div>
+    </div>   
+    <div class="city" @click="handleClick">
+        {{$store.state.city}}
+    </div>   
   </div>
 </template>
 
 <script>
 export default {
-  name: 'index-header'
+  name: 'index-header',
+  props: {
+    city: String
+  },
+  methods: {
+    handleClick () {
+      this.$router.push('/city')
+    }
+  },
+  watch: {
+    '$store.state.city' () {
+      console.log(1)
+    }
+  }
 }
 </script>
 
@@ -48,8 +59,10 @@ export default {
         padding-right: .04rem
     .city
       position: relative
-      padding-right: .6rem
-      &:before
+      float: right
+      line-height: .88rem
+      padding: 0 .46rem 0 .22rem
+      &::before
         position: absolute
         top: .34rem
         right: .2rem
